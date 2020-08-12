@@ -1,0 +1,58 @@
+<nav class="sidebar sidebar-offcanvas" id="sidebar">
+  <ul class="nav">
+    <li class="nav-item nav-profile">
+      <a href="javascript:;" class="nav-link">
+        
+        <div class="nav-profile-text">
+          <span class="font-weight-bold mb-2"></span>
+          <span class="text-secondary text-small"></span>
+        </div>
+        
+      </a>
+    </li>
+    <li class="nav-item" [ngClass]="{ 'active': dashboard.isActive }">
+      <a class="nav-link" routerLink="/dashboard" routerLinkActive #dashboard="routerLinkActive">
+        <span class="menu-title">Dashboard</span>
+        <i class="mdi mdi-home menu-icon"></i>
+      </a>
+    </li>
+    <li class="nav-item" [ngClass]="{ 'active': forms.isActive }">
+      <a class="nav-link" routerLink="e-wallet/basic-elements" routerLinkActive #forms="routerLinkActive">
+        <span class="menu-title">E-Wallet</span>
+        <i class="mdi mdi-wallet menu-icon"></i>
+      </a>
+    </li>
+    <li class="nav-item" [ngClass]="{ 'active': charts.isActive }">
+      <a class="nav-link" routerLink="affiliates/basic-elements" routerLinkActive #charts="routerLinkActive">
+        <span class="menu-title">Affiliates</span>
+        <i class="mdi mdi-arrange-send-backward menu-icon"></i>
+      </a>
+    </li>
+    <li class="nav-item" [ngClass]="{ 'active': tables.isActive }">
+      <a class="nav-link" routerLink="/basic-table" routerLinkActive #tables="routerLinkActive">
+        <span class="menu-title">Events</span>
+        <i class="mdi mdi-domain menu-icon"></i>
+      </a>
+    </li>
+    <li class="nav-item" [ngClass]="{ 'active': icons.isActive }">
+      <a class="nav-link" routerLink="payments/mdi" routerLinkActive #icons="routerLinkActive">
+        <span class="menu-title">Payments</span>
+        <i class="mdi mdi-cards-outline menu-icon"></i>
+      </a>
+    </li>
+    <li class="nav-item" [ngClass]="{ 'active': forms.isActive }">
+      <a class="nav-link" routerLink="managemybusiness/basic-elements" routerLinkActive #forms="routerLinkActive">
+        <span class="menu-title">Manage My Business</span>
+        <i class="mdi mdi-folder-multiple menu-icon"></i>
+      </a>
+    </li>
+    <li class="nav-item" [ngClass]="{ 'active' :icons.isActive }">
+      
+      <a class="nav-link" routerLink="settings/basic-elements" routerLinkActive #icons="routerLinkActive">
+        <span class="menu-title">Settings</span>
+
+        <i class="mdi mdi-brightness-7 menu-icon"></i>
+        </a>
+    </li>
+  </ul>
+</nav>

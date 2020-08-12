@@ -1,0 +1,344 @@
+@import '../../styles.scss';
+
+.rounded-legend {
+  ul {
+    padding-left: 0;
+    margin-bottom: 0;
+    li {
+      list-style-type: none;
+      color: $text-muted;
+      font-size: .75rem;
+      .legend-dots {
+        width: 1rem;
+        height: 1rem;
+        border-radius: 100%;
+        display: inline-block;
+        vertical-align: text-bottom;
+        margin-right: .5rem;
+        .rtl & {
+          margin-left: .5rem;
+        }
+      }
+    }
+  }
+  &.legend-horizontal {
+    @include display-flex;
+    ul {
+      li {
+        display: inline-block;
+        margin-right: 1.5rem;
+        .rtl & {
+          margin-right: auto;
+          margin-left: 1.5rem;
+        }
+      }
+    }
+  }
+ 
+}
+
+
+#traffic-chart-legend {
+  ul {
+    li {
+      &:nth-child(1) {
+        .legend-dots {
+          background:linear-gradient(to right, rgba(54, 215, 232, 1), rgba(177, 148, 250, 1))
+        }
+      }
+      &:nth-child(2) {
+        .legend-dots {
+          background:linear-gradient(to right, rgba(6, 185, 157, 1), rgba(132, 217, 210, 1));
+        }
+      }
+      &:nth-child(3) {
+        .legend-dots {
+          background:linear-gradient(to right, rgba(255, 191, 150, 1), rgba(254, 112, 150, 1));
+        }
+      }
+    }
+  }
+}
+.stretch-card {
+
+  color: black !important;
+}
+.card{
+  border-radius: 10px;
+}
+
+
+.services {
+	margin-bottom: 30px;
+	position: relative;
+	padding: 20px 0;
+	z-index: 0;
+	display: block;
+	border: 1px solid #e6e6e6;
+	-webkit-transition: .3s;
+	-o-transition: .3s;
+	transition: .3s;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	-ms-border-radius: 4px;
+  border-radius: 4px;
+  background: white;
+}
+.page-title-icons{
+  color: #047edf !important;
+  font-size: 15px;
+}
+.round{
+  list-style-type: none;
+  display: inline-flex;
+}
+.cardlist{
+  line-height: 20px;
+  line-height: 2.8 !important;
+}
+.card .card-body {
+    padding: 1.5rem 2.5rem;
+}
+.cardd{
+  list-style-type: none;
+  color: black;
+}
+.mem{
+  list-style-type: none;
+  text-align: left;
+}
+.mem2{
+  list-style-type: none;
+}
+.pluss{
+  color: #5f97ff!important;
+}
+.desc{
+  margin-top: 20px;
+}
+#chart {
+  max-width: 650px;
+  margin: 35px auto;
+}
+.icon1{
+  border-radius: 10px;
+}
+
+
+@font-face {
+  font-family: 'Material Icons';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Material Icons'), local('MaterialIcons-Regular'), url(https://fonts.gstatic.com/s/materialicons/v18/2fcrYFNaTjcS6g4U3t-Y5ZjZjT5FdEJ140U2DJYC3mY.woff2) format('woff2');
+}
+
+.material-icons {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.middle-indicator{
+   position:absolute;
+   top:50%;
+   }
+  .middle-indicator-text{
+   font-size: 4.2rem;
+  }
+  a.middle-indicator-text{
+    color:white !important;
+  }
+.content-indicator{
+    width: 64px;
+    height: 64px;
+    background: none;
+    -moz-border-radius: 50px;
+    -webkit-border-radius: 50px;
+    border-radius: 50px; 
+  }
+    .indicators{
+  	visibility: hidden;
+  }
+
+  .textdash{
+    text-align: center;
+  }
+
+  
+
+
+
+
+
+  $configs: (
+	
+	chart-two: (
+		svgSize: 200px,
+		percentage: 60,
+		strokeWidth: 15px,
+		backgroundColor: #ebce2b,
+		foregroundColor: #1e81c4,
+		labelColor: #2469c4,
+		labelFontSize: 3.5rem,
+		duration: 2s,
+		animationDelay: 1s
+	),
+	
+);
+
+
+/* ------- DO NOT EDIT BELOW --------- */
+$pi: 3.14;
+$labelData: '';
+@for $i from 0 to 101 {
+	$labelData: $labelData + $i + '%' + '\a';
+}
+
+@each $chart, $param in $configs {
+	
+	$c: (map-get($param, svgSize) - map-get($param, strokeWidth)) * $pi;
+	$cOffSet: (map-get($param, percentage)/100)*$c;
+	
+	.#{$chart} {
+		width: map-get($param, svgSize);
+		height: map-get($param, svgSize);
+		margin: 0;
+		position: relative;
+		
+		&.animate {
+			svg .circle-foreground {
+				animation: offset map-get($param, duration) ease-in-out forwards;
+				animation-delay: map-get($param, animationDelay);
+			}
+			figcaption:after {
+				animation: #{$chart}-label map-get($param, duration) steps(map-get($param, percentage)) forwards;
+				animation-delay: map-get($param, animationDelay);
+			}
+		}
+
+		svg {
+			width: 100%;
+			height: 100%;
+			.circle-background {
+				r: (map-get($param, svgSize) - map-get($param, strokeWidth))/2;
+				cx: 50%;
+				cy: 50%;
+				fill: none;
+				stroke: map-get($param, backgroundColor);
+				stroke-width: map-get($param, strokeWidth);
+			}
+			.circle-foreground {
+				@extend .circle-background;
+				stroke: map-get($param, foregroundColor);
+				stroke-dasharray: $cOffSet $c;
+				stroke-dashoffset: $cOffSet;
+				stroke-linecap: round;
+				transform-origin: 50% 50%;
+				transform: rotate(-90deg);
+			}
+		}
+		figcaption {
+			display: inline-block;
+			width: 100%;
+			height: map-get($param, labelFontSize);
+			overflow: hidden;
+			text-align: center;
+			color: map-get($param, labelColor);
+			position: absolute;
+			top: calc(50% - #{map-get($param, labelFontSize)/2});
+			left: 0;
+			font-size: 0;
+			&:after {
+				display: inline-block;
+				content: $labelData;
+				white-space: pre;
+				font-size: map-get($param, labelFontSize);
+				line-height: map-get($param, labelFontSize);
+			}
+		}
+	}
+	@keyframes #{$chart}-label {
+		100% {
+			transform: translateY(map-get($param, labelFontSize) * (-(map-get($param, percentage))));
+		}
+	}
+}
+@keyframes offset {
+	100% {
+		stroke-dashoffset: 0;
+	}
+}
+
+
+/* codepen styling only */
+@import url(https://fonts.googleapis.com/css?family=Abel);
+body {
+	background: #272b31;
+	height: 100vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+figure {
+	margin: 1rem!important;
+}
+figcaption {
+	font-family: 'Abel', sans-serif;
+}
+
+
+  .icon-search-container {
+	  margin-top: -140px;
+	  float: right;
+	  background: white;
+	display: inline-block;
+	border: 2px solid #d9d9d9;
+	border-radius: 50px;
+	height: 50px;
+	width: 50px;
+	position: relative;
+	transition: width 0.2s ease-out;
+	backface-visibility: hidden;
+	
+	&.active {
+	  width: 285px;
+	  
+	  .fa-times-circle {
+		opacity: 1;
+	  }
+	  .search-input {
+		width: 200px;
+	  }
+	}
+	
+  .fa-arrow-right {
+	  color: #2980b9;
+	  font-size: 30px;
+	  position: absolute;
+	  top: 7px;
+	  left: 8px;
+	  cursor: pointer;
+	}
+	.fa-times-circle {
+	  opacity: 0;
+	  color: #d9d9d9;
+	  font-size: 20px;
+	  position: absolute;
+	  top: 12px;
+	  right: 8px;
+	  transition: opacity 0.2s ease-out;
+	  cursor: pointer;
+	}
+	
+
+	
+  }
